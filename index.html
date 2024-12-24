@@ -3,44 +3,147 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Feeding Pet Example</title>
+    <title>PetPal Demo</title>
     <style>
-        body {
-            /* Use the full screen as the background */
-            font-family: Arial, sans-serif;
+        /* Simple global reset */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
-            text-align: center;
-
-            /* Set the initial pet background (closed mouth image) */
-            background: url('150.jpg');
-            background-size: cover;
-
+            padding: 0;
         }
 
-        /* Progress bar container */
-        #progressBar {
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /********************************************
+     * LOGIN SECTION
+     ********************************************/
+        #loginContainer {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            margin-bottom: 30px;
+        }
+
+        #loginContainer h2 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        #loginContainer label {
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #loginContainer input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        #loginContainer button {
+            width: 100%;
+            padding: 10px;
+            cursor: pointer;
+            background: #76c7c0;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        #errorMsg {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            display: none;
+            /* Hidden by default */
+        }
+
+        /********************************************
+     * PET SCREEN SECTION
+     ********************************************/
+        #petContainer {
+            display: none;
+            /* hidden until login is successful */
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Pet image or area */
+        #petDisplay {
             position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px;
+            background: url("150.jpg") no-repeat center center;
+            background-size: contain;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            transition: background-image 0.3s ease;
+        }
+
+        /* Health bar container */
+        #healthBarContainer {
             width: 300px;
             height: 25px;
             margin: 0 auto 20px;
             background-color: #ccc;
             border-radius: 5px;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Progress bar fill */
-        #progressBarFill {
+        /* Health bar fill */
+        #healthBar {
             height: 100%;
-            width: 0;
-            background-color: #76c7c0;
+            width: 100%;
             border-radius: 5px 0 0 5px;
             transition: width 0.3s ease;
+            background-color: #76c7c0;
+            width: 100%;
+            /* Start full or you can start with 100% */
         }
 
-        button {
+        /* “Sick” label or any error label if needed */
+        #statusMessage {
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: red;
+            display: none;
+            /* Hidden by default */
+        }
+
+        /* Buttons row */
+        #controls {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        #controls button {
             padding: 10px 20px;
-            font-size: 16px;
+            font-size: 1rem;
             cursor: pointer;
         }
     </style>
@@ -48,43 +151,136 @@
 
 <body>
 
-    <h1>Feed the Pet!</h1>
+    <h1>PetPal</h1>
 
-    <!-- Progress bar -->
-    <div id="progressBar">
-        <div id="progressBarFill"></div>
+    <!-- LOGIN CONTAINER -->
+    <div id="loginContainer">
+        <h2>Login</h2>
+        <div id="errorMsg">Invalid username or password.</div>
+        <label for="username">Username</label>
+        <input type="text" id="username" />
+        <label for="password">Password</label>
+        <input type="password" id="password" />
+        <button id="loginBtn">Login</button>
     </div>
 
-    <!-- Feed button -->
-    <button id="feedButton">Feed</button>
+    <!-- PET SCREEN -->
+    <div id="petContainer">
+        <h2>Your Virtual Pet</h2>
+        <div id="petDisplay"></div>
+
+        <!-- Health Bar -->
+        <div id="healthBarContainer">
+            <div id="healthBar"></div>
+        </div>
+
+        <!-- Sick Status -->
+        <div id="statusMessage">Your pet is sick!</div>
+
+        <!-- Controls -->
+        <div id="controls">
+            <button id="feedBtn">Feed</button>
+            <!-- Add more buttons here (like different food items, or “Heal” if wanted) -->
+        </div>
+    </div>
 
     <script>
-        let progressValue = 0;
-        const maxProgress = 100;
-        const progressBarFill = document.getElementById('progressBarFill');
-        const feedButton = document.getElementById('feedButton');
+        /***************************************
+         * 1) SIMPLE LOGIN LOGIC
+         **************************************/
+        const loginContainer = document.getElementById("loginContainer");
+        const loginBtn = document.getElementById("loginBtn");
+        const errorMsg = document.getElementById("errorMsg");
 
-        feedButton.addEventListener('click', () => {
-            // 1. Increase progress
-            if (progressValue < maxProgress) {
-                progressValue += 10;
-                if (progressValue > maxProgress) {
-                    progressValue = maxProgress;
-                }
+        // Hardcoded credentials (for demo only!)
+        const VALID_USERNAME = "user";
+        const VALID_PASSWORD = "pass";
+
+        loginBtn.addEventListener("click", function () {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                // Hide login, show pet container
+                loginContainer.style.display = "none";
+                petContainer.style.display = "block";
+
+                // (Optional) Start the pet’s health countdown or any initial actions
+                initPet();
+            } else {
+                errorMsg.style.display = "block";
             }
-            // Update progress bar width
-            progressBarFill.style.width = progressValue + '%';
-
-            // 2. Switch body background to "open mouth" image
-            document.body.style.backgroundImage = "url('bf0.jpg')";
-
-            // 3. After 1 second, switch back to the original background
-            setTimeout(() => {
-                document.body.style.backgroundImage = "url('150.jpg')";
-            }, 1000);
         });
-    </script>
 
+        /***************************************
+         * 2) PET MECHANICS
+         **************************************/
+        const petContainer = document.getElementById("petContainer");
+        const petDisplay = document.getElementById("petDisplay");
+        const feedBtn = document.getElementById("feedBtn");
+        const statusMessage = document.getElementById("statusMessage");
+
+        // Health Bar
+        const healthBar = document.getElementById("healthBar");
+        let currentHealth = 100;
+        const maxHealth = 100;
+        const sickThreshold = 30; // Below this, pet is sick
+
+        // Interval IDs
+        let healthDecreaseInterval;
+
+        // Initialize the pet after a successful login
+        function initPet() {
+            currentHealth = maxHealth;
+            updateHealthBar();
+
+            // Optionally start an interval that decreases health over time
+            healthDecreaseInterval = setInterval(() => {
+                decreaseHealth(1); // decreases by 1 every X seconds
+            }, 100);
+        }
+
+        // Decrease the health by a certain amount
+        function decreaseHealth(amount) {
+            currentHealth -= amount;
+            if (currentHealth < 0) {
+                currentHealth = 0;
+            }
+            updateHealthBar();
+        }
+
+        // Increase the health (feed the pet)
+        feedBtn.addEventListener("click", function () {
+            // Simple feeding logic: +10 health
+            currentHealth += 10;
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth;
+            }
+
+            // Show the "open mouth" image for feeding, then revert
+            petDisplay.style.backgroundImage = "url('bf0.jpg')";
+            setTimeout(() => {
+                petDisplay.style.backgroundImage = "url('150.jpg')";
+            }, 500);
+
+            updateHealthBar();
+        });
+
+        // Updates the health bar width and checks for “sick” condition
+        function updateHealthBar() {
+            // Calculate percentage
+            const healthPercent = (currentHealth / maxHealth) * 100;
+            healthBar.style.width = healthPercent + "%";
+
+            // Check sickness
+            if (currentHealth < sickThreshold) {
+                // Pet is sick
+                statusMessage.style.display = "block";
+            } else {
+                statusMessage.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
