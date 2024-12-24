@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Feeding Pet Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        /* Container for the pet image */
+        #petContainer {
+            width: 1600px;
+            height: 1000px;
+            margin: 0 auto 20px;
+            background: url('150.jpg');
+            background-size: cover;
+            transition: background-image 0.3s ease;
+        }
+
+        /* Progress bar container */
+        #progressBar {
+            position: relative;
+            width: 300px;
+            height: 25px;
+            margin: 0 auto 20px;
+            background-color: #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        /* Progress bar fill */
+        #progressBarFill {
+            height: 100%;
+            width: 0;
+            background-color: #76c7c0;
+            border-radius: 5px 0 0 5px;
+            transition: width 0.3s ease;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Feed the Pet!</h1>
+
+    <!-- Pet Container (initially showing image1) -->
+    <div id="petContainer"></div>
+
+    <!-- Progress bar -->
+    <div id="progressBar">
+        <div id="progressBarFill"></div>
+    </div>
+
+    <!-- Feed button -->
+    <button id="feedButton">Feed</button>
+
+    <script>
+        // Store the current progress (0 to 100 for example)
+        let progressValue = 0;
+        const maxProgress = 100;
+        const progressBarFill = document.getElementById('progressBarFill');
+        const petContainer = document.getElementById('petContainer');
+        const feedButton = document.getElementById('feedButton');
+
+        feedButton.addEventListener('click', () => {
+            // 1. Increase progress
+            if (progressValue < maxProgress) {
+                progressValue += 10; // Increase by 10 each time you feed
+                if (progressValue > maxProgress) {
+                    progressValue = maxProgress;
+                }
+            }
+            // Update progress bar width
+            progressBarFill.style.width = progressValue + '%';
+
+            // 2. Switch to image2 (open mouth)
+            petContainer.style.backgroundImage = "url('bf0.jpg')";
+
+            // 3. After 1 second, switch back to image1 (closed mouth)
+            setTimeout(() => {
+                petContainer.style.backgroundImage = "url('150.jpg')";
+            }, 300);
+        });
+    </script>
+
+</body>
+
+</html>
