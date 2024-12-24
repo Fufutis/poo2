@@ -6,21 +6,16 @@
     <title>Feeding Pet Example</title>
     <style>
         body {
+            /* Use the full screen as the background */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             text-align: center;
-            background-color: #f0f0f0;
-        }
 
-        /* Container for the pet image */
-        #petContainer {
-            width: 1600px;
-            height: 1000px;
-            margin: 0 auto 20px;
+            /* Set the initial pet background (closed mouth image) */
             background: url('150.jpg');
             background-size: cover;
-            transition: background-image 0.3s ease;
+
         }
 
         /* Progress bar container */
@@ -55,9 +50,6 @@
 
     <h1>Feed the Pet!</h1>
 
-    <!-- Pet Container (initially showing image1) -->
-    <div id="petContainer"></div>
-
     <!-- Progress bar -->
     <div id="progressBar">
         <div id="progressBarFill"></div>
@@ -67,17 +59,15 @@
     <button id="feedButton">Feed</button>
 
     <script>
-        // Store the current progress (0 to 100 for example)
         let progressValue = 0;
         const maxProgress = 100;
         const progressBarFill = document.getElementById('progressBarFill');
-        const petContainer = document.getElementById('petContainer');
         const feedButton = document.getElementById('feedButton');
 
         feedButton.addEventListener('click', () => {
             // 1. Increase progress
             if (progressValue < maxProgress) {
-                progressValue += 10; // Increase by 10 each time you feed
+                progressValue += 10;
                 if (progressValue > maxProgress) {
                     progressValue = maxProgress;
                 }
@@ -85,13 +75,13 @@
             // Update progress bar width
             progressBarFill.style.width = progressValue + '%';
 
-            // 2. Switch to image2 (open mouth)
-            petContainer.style.backgroundImage = "url('bf0.jpg')";
+            // 2. Switch body background to "open mouth" image
+            document.body.style.backgroundImage = "url('bf0.jpg')";
 
-            // 3. After 1 second, switch back to image1 (closed mouth)
+            // 3. After 1 second, switch back to the original background
             setTimeout(() => {
-                petContainer.style.backgroundImage = "url('150.jpg')";
-            }, 300);
+                document.body.style.backgroundImage = "url('150.jpg')";
+            }, 1000);
         });
     </script>
 
