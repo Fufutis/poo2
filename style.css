@@ -24,6 +24,7 @@ h1 {
  * PET SCREEN SECTION
  ********************************************/
 #petContainer {
+    padding-top: 5%;
     text-align: center;
     width: 100%;
     max-width: 600px;

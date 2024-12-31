@@ -25,8 +25,8 @@ window.addEventListener("load", function() {
 // Food effects (health values)
 const foodEffects = {
     apple: 10,    // Apple restores 10 health
-    orange: 20,   // Orange restores 20 health
-    banana: 30    // Banana restores 30 health
+    orange: 30,   // Orange restores 20 health
+    banana: 90    // Banana restores 30 health
 };
 function initPet() {
     // Start with full health
