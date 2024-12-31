@@ -1,89 +1,75 @@
-/* Simple global reset */
+/* Simple global reset, if desired */
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
+  }
+  
+  /* Let body styling be mostly handled by Bootstrap */
+  body {
     font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-/********************************************
- * PET SCREEN SECTION
- ********************************************/
-#petContainer {
-    padding-top: 5%;
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Pet image or area */
-#petDisplay {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto 20px;
+    background: #f0f0f0; /* or use .bg-light in HTML body tag */
+  }
+  
+  /* Pet Container is now mostly controlled by Bootstrap classes 
+     so you might not need #petContainer styling. 
+     If you do, you can add them here:
+  */
+  #petContainer {
+    /* no need for fixed heights—Bootstrap will handle responsiveness */
+  }
+  
+  /* Pet display: using background instead of an <img> */
+  #petDisplay {
+    width: 100%; 
+    height: 300px;         /* or auto, or a fixed height for your graphic area */
     background: url("150.jpg") no-repeat center center;
     background-size: contain;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    transition: background-image 0.3s ease;
-}
-
-/* Health bar container */
-#healthBarContainer {
+  }
+  
+  /* Health bar container */
+  #healthBarContainer {
     width: 300px;
     height: 25px;
-    margin: 0 auto 20px;
     background-color: #ccc;
     border-radius: 5px;
     overflow: hidden;
     position: relative;
-}
-
-/* Health bar fill */
-#healthBar {
+  }
+  
+  /* Health bar fill */
+  #healthBar {
     height: 100%;
     border-radius: 5px 0 0 5px;
     transition: width 0.3s ease;
     background-color: #76c7c0;
-    width: 100%; /* Start fully at 100% (you can adjust in the script if you prefer) */
-}
-
-/* “Sick” label or any error label if needed */
-#statusMessage {
-    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  /* Sick message is hidden by default; 
+     your script can show/hide it by toggling display or a class. 
+  */
+  #statusMessage {
     font-weight: bold;
-    font-size: 1rem;
-    color: red;
-    display: none; /* Hidden by default */
-}
-
-/* Buttons row */
-#controls {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
-}
-
-#controls button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-}
+  }
+  
+  /*********** RESPONSIVE QUERIES ***********/
+  
+  /* Tablet screens */
+  @media (max-width: 768px) {
+    #healthBarContainer {
+      width: 200px;
+      height: 20px;
+    }
+  }
+  
+  /* Phones */
+  @media (max-width: 480px) {
+    #petDisplay {
+      height: 200px; /* Make the display smaller for very small screens */
+    }
+  
+    #healthBarContainer {
+      width: 150px;
+      height: 15px;
+    }
+  }
+  
