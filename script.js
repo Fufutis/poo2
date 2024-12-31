@@ -22,6 +22,12 @@ window.addEventListener("load", function() {
     initPet();
 });
 
+// Food effects (health values)
+const foodEffects = {
+    apple: 10,    // Apple restores 10 health
+    orange: 20,   // Orange restores 20 health
+    banana: 30    // Banana restores 30 health
+};
 function initPet() {
     // Start with full health
     currentHealth = maxHealth;
@@ -50,13 +56,19 @@ function decreaseHealth(amount) {
  * Increase the pet's health (Feed the pet)
  */
 feedBtn.addEventListener("click", function() {
-    // Simple feeding logic: +10 health
-    currentHealth += 10;
+    // Get the selected food from the dropdown
+    const selectedFood = foodSelector.value;
+
+    // Get the health effect of the selected food
+    const healthIncrease = foodEffects[selectedFood] || 0; // Default to 0 if not found
+
+    // Increase the pet's health based on the food
+    currentHealth += healthIncrease;
     if (currentHealth > maxHealth) {
         currentHealth = maxHealth;
     }
 
-    // Temporarily switch to "open mouth" image
+    // Temporarily switch to "eating" image
     petDisplay.style.backgroundImage = "url('bf0.jpg')";
     setTimeout(() => {
         petDisplay.style.backgroundImage = "url('150.jpg')";
