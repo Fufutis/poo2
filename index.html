@@ -15,12 +15,33 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f8ff;
+            background-color: #472601;
             margin: 0;
         }
 
         #nameScreen {
             text-align: center;
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #00ce89;
+        }
+
+        p {
+            color: #00ce89;
+        }
+
+
+        .btn-primary {
+            background-color: #00ce89;
+            border-color: #018559;
+        }
+
+        .btn-primary:hover {
+            background-color: #00b87a;
+        }
+
         }
     </style>
 </head>
@@ -28,11 +49,11 @@
 <body>
 
     <div id="nameScreen">
-        <h1 class="text-primary">Welcome to PetPal</h1>
-        <p class="text-secondary">Please enter your pet's name:</p>
+        <h1>Welcome to PetPal</h1>
+        <p>Please enter your pet's name:</p>
         <form id="nameForm">
             <div class="mb-3">
-                <label for="petName" class="form-label">Pet Name</label>
+
                 <input type="text" class="form-control" id="petName" placeholder="Enter your pet's name" required />
             </div>
             <button type="submit" class="btn btn-primary w-100">Start</button>
