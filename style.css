@@ -13,10 +13,7 @@
      so you might not need #petContainer styling. 
      If you do, you can add them here:
   */
-  #petContainer {
-    /* no need for fixed heights—Bootstrap will handle responsiveness */
-  }
-  
+
   /* Pet display: using background instead of an <img> */
   #petDisplay {
     width: 100%; 
