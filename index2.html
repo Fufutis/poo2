@@ -6,7 +6,7 @@
     <title>Pooshtis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Bootstrap CSS (CDN) -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
     <style>
@@ -18,54 +18,31 @@
             overflow: hidden;
         }
 
-        /* Fixed-height navbar (typical Bootstrap ~56px) */
         nav.navbar {
             height: 56px;
         }
 
         #feedBtn {
-            /* Position near the bottom */
             position: absolute;
             bottom: 25px;
-            /* Distance from the bottom of the container */
             left: 48.8%;
             transform: translateX(-50%);
-            /* Center horizontally */
-
-            /* Custom color styling */
             background-color: rgb(0, 26, 59);
-            /* Black background */
             color: white;
-            /* White text */
             border: 2px solid black;
-            /* Optional border */
             padding: 6px 44px;
-            /* Adjust padding for better size */
             font-size: 1rem;
-            /* Adjust font size */
             border-radius: 5px;
-            /* Optional: rounded corners */
             cursor: pointer;
         }
 
         #feedBtn:hover {
             background-color: rgb(1, 34, 77);
-            /* Slightly lighter on hover */
         }
 
-        /* 
-      The main container fills the rest of the screen
-      (100vh - navbarHeight). We'll rely on media queries
-      to pick the correct background image by default.
-    */
         #petContainer {
             height: calc(100vh - 56px);
             width: 100%;
-
-            /* 
-        By default (portrait), let's show the tall cat image.
-        We'll override in landscape with a different image.
-      */
             background: url('CAT2.PNG') no-repeat center center;
             background-size: 100% 100%;
             /* Fill container width; keep aspect ratio */
@@ -83,11 +60,6 @@
             transition: background-image 0.1s ease-in-out;
         }
 
-        /* 
-      In landscape orientation, swap the default image to the wide version.
-      Use contain so it won’t “zoom in.” This may result in letterboxing if the
-      container ratio doesn’t match the image ratio. 
-    */
         @media (orientation: landscape) {
             #petContainer {
                 background: url('WIDECAT.PNG') no-repeat center center;
@@ -127,12 +99,29 @@
         }
 
         #healthBarContainer {
-            width: 200px;
+            width: 500px;
+            /* Default width for larger screens */
             height: 20px;
             background-color: #ccc;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
+        }
+
+        /* For medium-sized screens (tablets, etc.) */
+        @media (max-width: 780px) {
+            #healthBarContainer {
+                width: 200px;
+                /* Smaller width for medium screens */
+            }
+        }
+
+        /* For small screens (mobile phones, etc.) */
+        @media (max-width: 480px) {
+            #healthBarContainer {
+                width: 80px;
+                /* Even smaller width for small screens */
+            }
         }
 
         #healthBar {
@@ -149,6 +138,7 @@
             /* Red text */
             font-weight: bold;
             /* Bold text */
+            font-size: 2rem;
             /* Position near the bottom */
             position: absolute;
             bottom: 100px;
@@ -165,11 +155,9 @@
 
 <body class="bg-light">
 
-    <!-- NAVBAR -->
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid navbar-content">
-            <!-- Title -->
-            <h2 class="text-light mb-0">Pooshtis</h2>
+            <h2 id="petName" class="text-light mb-0"></h2>
             <!-- Health Bar -->
             <div id="healthBarContainer">
                 <div id="healthBar"></div>
@@ -184,13 +172,10 @@
                     <option value="banana">Banana</option>
                 </select>
             </div>
-
         </div>
     </nav>
 
-    <!-- MAIN CONTAINER FOR PET DISPLAY -->
     <div id="petContainer">
-        <!-- Feed Button -->
         <button id="feedBtn" class="feedBtn">Feed</button>
         <!-- Sick Status -->
         <span id="statusMessage">Your pet is sick!</span>
@@ -202,6 +187,13 @@
     <!-- PetPal Script -->
     <script>
         const petContainer = document.getElementById("petContainer");
+        // Get the pet name from localStorage, with a fallback to "Pooshtis"
+        const petName = localStorage.getItem('petName') || 'Pooshtis';
+
+        // Update the title and heading
+        document.getElementById('petName').textContent = petName;
+
+        // Pet health logic
         const feedBtn = document.getElementById("feedBtn");
         const healthBar = document.getElementById("healthBar");
         const statusMessage = document.getElementById("statusMessage");
