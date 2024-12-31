@@ -113,71 +113,52 @@
                 background: url('WIDECAT2.PNG') no-repeat center center;
                 background-size: 100% 100%;
             }
+        }
 
-            .navbar-brand {
-                margin-right: 2rem;
-            }
+        .navbar-brand {
+            margin-right: 2rem;
+        }
 
-            .navbar-content {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: 1rem;
-            }
+        .navbar-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
 
-            #healthBarContainer {
-                width: 200px;
-                height: 20px;
-                background-color: #ccc;
-                border-radius: 5px;
-                overflow: hidden;
-                position: relative;
-            }
+        #healthBarContainer {
+            width: 200px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
 
-            #healthBar {
-                height: 100%;
-                border-radius: 5px 0 0 5px;
-                transition: width 0.1s ease;
-                background-color: #76c7c0;
-                width: 100%;
-            }
+        #healthBar {
+            height: 100%;
+            border-radius: 5px 0 0 5px;
+            transition: width 0.1s ease;
+            background-color: #76c7c0;
+            width: 100%;
+        }
 
-            #statusMessage {
+        #statusMessage {
 
-                color: red;
-                /* Red text */
-                font-weight: bold;
-                /* Bold text */
-                /* Position near the bottom */
-                position: absolute;
-                bottom: 100px;
-                /* Distance from the bottom of the container */
-                left: 48.8%;
-                transform: translateX(-50%);
-                /* Center horizontally */
+            color: red;
+            /* Red text */
+            font-weight: bold;
+            /* Bold text */
+            /* Position near the bottom */
+            position: absolute;
+            bottom: 100px;
+            /* Distance from the bottom of the container */
+            left: 48.8%;
+            transform: translateX(-50%);
+            /* Center horizontally */
 
-                display: none;
-                /* Initially hidden */
-            }
-
-            /* Media queries to adjust styling for smaller screens */
-            @media (max-width: 768px) {
-                #statusMessage {
-                    bottom: 80px;
-                    /* Move up slightly for smaller screens */
-                    font-size: 1em;
-                    /* Reduce font size for better fit */
-                }
-            }
-
-            @media (max-width: 480px) {
-                #statusMessage {
-                    bottom: 60px;
-                    /* Move up further for very small screens */
-                    font-size: 0.9em;
-                    /* Further reduce font size */
-                }
-            }
+            display: none;
+            /* Initially hidden */
         }
     </style>
 </head>
