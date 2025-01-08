@@ -22,42 +22,50 @@
             height: 56px;
         }
 
-        #feedBtn {
+        /* Button Styles */
+        .action-btn {
             position: absolute;
             bottom: 25px;
-            left: 48.8%;
-            transform: translateX(-50%);
             background-color: rgb(0, 26, 59);
             color: white;
             border: 2px solid black;
-            padding: 6px 44px;
+            padding: 6px 20px;
             font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        #feedBtn:hover {
+        .action-btn:hover {
             background-color: rgb(1, 34, 77);
         }
 
+
+        /* Positioning Buttons */
+        #feedBtn {
+            left: 40%;
+        }
+
+        #sleepBtn {
+            left: 60%;
+        }
+
+        /* Pet Container Styles */
         #petContainer {
             height: calc(100vh - 56px);
             width: 100%;
             background: url('CAT2.PNG') no-repeat center center;
             background-size: 100% 100%;
-            /* Fill container width; keep aspect ratio */
             background-position: top center;
-            /* or 'center center' */
 
-            /* Flex layout to position elements inside (vertical by default) */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
 
-            /* Transition allows a smoother switch if orientation changes */
             transition: background-image 0.1s ease-in-out;
+            position: relative;
         }
 
         @media (orientation: landscape) {
@@ -67,26 +75,20 @@
             }
         }
 
-        /*
-      EATING STATE
-      We'll define classes for the "eating" moment. 
-      We apply them via JavaScript and rely on orientation queries 
-      to pick the correct image.
-    */
+        /* Eating State */
         #petContainer.eating {
-            /* By default (portrait) show CAT22 */
             background: url('CAT22.PNG') no-repeat center center;
             background-size: 100% 100%;
         }
 
         @media (orientation: landscape) {
             #petContainer.eating {
-                /* In landscape, use WIDECAT2 */
                 background: url('WIDECAT2.PNG') no-repeat center center;
                 background-size: 100% 100%;
             }
         }
 
+        /* Navbar Content */
         .navbar-brand {
             margin-right: 2rem;
         }
@@ -96,59 +98,95 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 1rem;
+            justify-content: center;
+            /* Centers items horizontally */
         }
 
-        #healthBarContainer {
-            width: 500px;
-            /* Default width for larger screens */
+        /* Responsive Layout for Small Screens */
+        @media (max-width: 480px) {
+            .navbar-content {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Progress Bars Container */
+        .bar-container {
+            width: 17%;
             height: 20px;
             background-color: #ccc;
-            border-radius: 5px;
+            border-radius: 10px;
             overflow: hidden;
             position: relative;
+            border: 2px solid black;
         }
 
-        /* For medium-sized screens (tablets, etc.) */
-        @media (max-width: 780px) {
-            #healthBarContainer {
-                width: 200px;
-                /* Smaller width for medium screens */
-            }
-        }
 
-        /* For small screens (mobile phones, etc.) */
+
         @media (max-width: 480px) {
-            #healthBarContainer {
-                width: 80px;
-                /* Even smaller width for small screens */
-            }
+            .bar-container {}
+        }
+
+        /* Individual Bars */
+        .bar {
+            height: 100%;
+            border-radius: 5px 0 0 5px;
+            transition: width 0.5s ease;
         }
 
         #healthBar {
-            height: 100%;
-            border-radius: 5px 0 0 5px;
-            transition: width 0.1s ease;
-            background-color: #76c7c0;
+            background-color: #ff0000;
             width: 100%;
         }
 
-        #statusMessage {
+        #feedingBar {
+            background-color: #c57e0b;
+            width: 100%;
+        }
 
+        #sleepingBar {
+            background-color: #4b44ad;
+            width: 100%;
+        }
+
+        /* Pet Name Styles */
+        #petName {
+            font-size: 1.5rem;
+            /* Default font size */
+            margin: 0;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Hide overflow text */
+            text-overflow: ellipsis;
+            /* Add ellipsis (...) when text is too long */
+            max-width: 150px;
+            /* Adjust as needed */
+        }
+
+        /* Responsive Font Sizes for Pet Name */
+        @media (max-width: 780px) {
+            #petName {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #petName {
+                font-size: 1rem;
+            }
+        }
+
+        /* Status Message */
+        #statusMessage {
             color: red;
-            /* Red text */
             font-weight: bold;
-            /* Bold text */
             font-size: 2rem;
-            /* Position near the bottom */
             position: absolute;
             bottom: 100px;
-            /* Distance from the bottom of the container */
-            left: 48.8%;
+            left: 50%;
             transform: translateX(-50%);
-            /* Center horizontally */
-
             display: none;
-            /* Initially hidden */
         }
     </style>
 </head>
@@ -157,10 +195,20 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid navbar-content">
-            <h2 id="petName" class="text-light mb-0"></h2>
+            <h2 id="petName" class="text-light mb-0">Pooshtis</h2>
             <!-- Health Bar -->
-            <div id="healthBarContainer">
-                <div id="healthBar"></div>
+            <div class="bar-container">
+                <div id="healthBar" class="bar"></div>
+            </div>
+
+            <!-- Feeding Bar -->
+            <div class="bar-container">
+                <div id="feedingBar" class="bar"></div>
+            </div>
+
+            <!-- Sleeping Bar -->
+            <div class="bar-container">
+                <div id="sleepingBar" class="bar"></div>
             </div>
 
             <!-- Food Selector -->
@@ -176,8 +224,9 @@
     </nav>
 
     <div id="petContainer">
-        <button id="feedBtn" class="feedBtn">Feed</button>
-        <!-- Sick Status -->
+        <button id="feedBtn" class="action-btn">Feed</button>
+        <button id="sleepBtn" class="action-btn">Sleep</button>
+        <!-- Status Message -->
         <span id="statusMessage">Your pet is sick!</span>
     </div>
 
@@ -186,82 +235,174 @@
 
     <!-- PetPal Script -->
     <script>
+        // DOM Elements
         const petContainer = document.getElementById("petContainer");
-        // Get the pet name from localStorage, with a fallback to "Pooshtis"
-        const petName = localStorage.getItem('petName') || 'Pooshtis';
-
-        // Update the title and heading
-        document.getElementById('petName').textContent = petName;
-
-        // Pet health logic
+        const petName = document.getElementById('petName');
         const feedBtn = document.getElementById("feedBtn");
+        const sleepBtn = document.getElementById("sleepBtn");
         const healthBar = document.getElementById("healthBar");
+        const feedingBar = document.getElementById("feedingBar");
+        const sleepingBar = document.getElementById("sleepingBar");
         const statusMessage = document.getElementById("statusMessage");
         const foodSelector = document.getElementById("foodSelector");
 
-        let currentHealth = 100;
-        const maxHealth = 100;
-        const sickThreshold = 30;
-        let healthDecreaseInterval;
+        // Pet Name
+        petName.textContent = localStorage.getItem('petName') || 'Pooshtis';
 
+        // Status Thresholds
+        const maxHealth = 100;
+        const maxFeeding = 100;
+        const maxSleeping = 100;
+        const sickThreshold = 30;
+        const feedingThreshold = 50;
+
+        // Current Stats
+        let currentHealth = maxHealth;
+        let currentFeeding = maxFeeding;
+        let currentSleeping = maxSleeping;
+
+        // Intervals
+        let healthDecreaseInterval;
+        let feedingDecreaseInterval;
+        let sleepingDecreaseInterval;
+
+        // Food Effects
         const foodEffects = {
             apple: 10,
             orange: 30,
             banana: 90
         };
 
+        // Initialize Pet Stats
         window.addEventListener("load", function () {
             initPet();
+            preloadImages([
+                'CAT2.PNG',
+                'CAT22.PNG',
+                'WIDECAT.PNG',
+                'WIDECAT2.PNG',
+                'bf0.jpg',
+                '150.jpg'
+            ]);
         });
 
         function initPet() {
             currentHealth = maxHealth;
-            updateHealthBar();
-            healthDecreaseInterval = setInterval(() => decreaseHealth(1), 100);
+            currentFeeding = maxFeeding;
+            currentSleeping = maxSleeping;
+            updateBars();
+
+            // Decrease Feeding over time
+            feedingDecreaseInterval = setInterval(() => {
+                decreaseFeeding(1);
+            }, 1000); // Decrease every second
+
+            // Decrease Sleeping over time
+            sleepingDecreaseInterval = setInterval(() => {
+                decreaseSleeping(1);
+            }, 1000); // Decrease every second
+
+            // Conditionally decrease Health
+            healthDecreaseInterval = setInterval(() => {
+                if (currentFeeding < feedingThreshold) {
+                    decreaseHealth(1);
+                }
+            }, 1000); // Check every second
         }
 
+        // Decrease Functions
         function decreaseHealth(amount) {
             currentHealth -= amount;
             if (currentHealth < 0) currentHealth = 0;
-            updateHealthBar();
+            updateBars();
+            checkGameOver();
         }
 
+        function decreaseFeeding(amount) {
+            currentFeeding -= amount;
+            if (currentFeeding < 0) currentFeeding = 0;
+            updateBars();
+            checkGameOver();
+        }
+
+        function decreaseSleeping(amount) {
+            currentSleeping -= amount;
+            if (currentSleeping < 0) currentSleeping = 0;
+            updateBars();
+            checkGameOver();
+        }
+
+        // Increase Functions
+        function increaseHealth(amount) {
+            currentHealth += amount;
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            updateBars();
+        }
+
+        function increaseFeeding(amount) {
+            currentFeeding += amount;
+            if (currentFeeding > maxFeeding) currentFeeding = maxFeeding;
+            updateBars();
+        }
+
+        function increaseSleeping(amount) {
+            currentSleeping += amount;
+            if (currentSleeping > maxSleeping) currentSleeping = maxSleeping;
+            updateBars();
+        }
+
+        // Update Progress Bars
+        function updateBars() {
+            healthBar.style.width = `${currentHealth}%`;
+            feedingBar.style.width = `${currentFeeding}%`;
+            sleepingBar.style.width = `${currentSleeping}%`;
+
+            // Update Status Message
+            if (currentHealth < sickThreshold) {
+                statusMessage.style.display = "block";
+            } else {
+                statusMessage.style.display = "none";
+            }
+        }
+
+        // Check for Game Over Conditions
+        function checkGameOver() {
+            if (currentHealth === 0 || currentFeeding === 0 || currentSleeping === 0) {
+                // Clear all intervals
+                clearInterval(healthDecreaseInterval);
+                clearInterval(feedingDecreaseInterval);
+                clearInterval(sleepingDecreaseInterval);
+                // Redirect to index.html after a short delay
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1000);
+            }
+        }
+
+        // Feed Button Event Listener
         feedBtn.addEventListener("click", function () {
             const selectedFood = foodSelector.value;
             const healthIncrease = foodEffects[selectedFood] || 0;
-            currentHealth += healthIncrease;
-            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            increaseFeeding(healthIncrease);
 
+            // Animate Eating
             petContainer.classList.add("eating");
             setTimeout(() => petContainer.classList.remove("eating"), 500);
-            updateHealthBar();
         });
 
-        function updateHealthBar() {
-            const healthPercent = (currentHealth / maxHealth) * 100;
-            healthBar.style.width = `${healthPercent}%`;
-            statusMessage.style.display = currentHealth < sickThreshold ? "block" : "none";
-        }
-        // List of images to preload
-        const imageUrls = [
-            'CAT2.PNG',
-            'CAT22.PNG',
-            'WIDECAT.PNG',
-            'WIDECAT2.PNG'
-        ];
+        // Sleep Button Event Listener
+        sleepBtn.addEventListener("click", function () {
+            increaseSleeping(60); // Increase sleeping by 60 units
+            // Optionally, add sleep animation or state changes here
+        });
 
-        // Function to preload images
+        // Preload Images
         function preloadImages(urls) {
             urls.forEach((url) => {
                 const img = new Image();
-                img.src = url; // Load the image
+                img.src = url;
             });
         }
-
-        // Preload images when the page loads
-        window.addEventListener('load', () => {
-            preloadImages(imageUrls);
-        });
     </script>
 
 </body>
