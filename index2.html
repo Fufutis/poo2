@@ -40,7 +40,6 @@
             background-color: rgb(1, 34, 77);
         }
 
-
         /* Positioning Buttons */
         #feedBtn {
             left: 40%;
@@ -102,11 +101,43 @@
             /* Centers items horizontally */
         }
 
-        /* Responsive Layout for Small Screens */
+        /* Media Query for Small Screens (480px and below) */
         @media (max-width: 480px) {
+
+            /* Double the Navbar Height */
+            nav.navbar {
+                height: 112px;
+            }
+
+            /* Stack Navbar Content Vertically */
             .navbar-content {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            /* Adjust Bar Containers */
+            .bar-container {
+                width: 80%;
+                /* Increased width for better visibility */
+                margin: 5px 0;
+                /* Vertical spacing between bars */
+            }
+
+            /* Adjust Button Positions */
+            #feedBtn {
+                left: 35%;
+                /* Adjusted to center more */
+            }
+
+            #sleepBtn {
+                left: 55%;
+                /* Adjusted to center more */
+            }
+
+            /* Optional: Adjust Font Size for Labels */
+            #foodSelector {
+                width: 60%;
+                /* Make the selector wider on small screens */
             }
         }
 
@@ -119,12 +150,6 @@
             overflow: hidden;
             position: relative;
             border: 2px solid black;
-        }
-
-
-
-        @media (max-width: 480px) {
-            .bar-container {}
         }
 
         /* Individual Bars */
