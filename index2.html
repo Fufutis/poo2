@@ -63,8 +63,24 @@
             align-items: center;
             text-align: center;
 
-            transition: background-image 0.1s ease-in-out;
+            transition: background-image 0.1s ease-in-out, filter 0.5s ease;
             position: relative;
+        }
+
+        /* Sleeping State */
+        #petContainer.sleeping {
+            filter: brightness(50%);
+            background-size: 100% 100%;
+            background: url('sleep.png') no-repeat center center;
+        }
+
+        @media (orientation: landscape) {
+            #petContainer.sleeping {
+                background: url('widesleep.png') no-repeat center center;
+                background-size: 100% 100%;
+                filter: brightness(50%);
+                /* Maintain brightness reduction */
+            }
         }
 
         @media (orientation: landscape) {
@@ -220,7 +236,7 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid navbar-content">
-            <h2 id="petName" class="text-light mb-0">Pooshtis</h2>
+            <h2 id="petName" class="text-light mb-0">Kolokotronis</h2>
             <!-- Health Bar -->
             <div class="bar-container">
                 <div id="healthBar" class="bar"></div>
@@ -260,7 +276,7 @@
 
     <!-- PetPal Script -->
     <script>
-        // DOM Elements
+        // Existing DOM Elements
         const petContainer = document.getElementById("petContainer");
         const petName = document.getElementById('petName');
         const feedBtn = document.getElementById("feedBtn");
@@ -306,8 +322,8 @@
                 'CAT22.PNG',
                 'WIDECAT.PNG',
                 'WIDECAT2.PNG',
-                'bf0.jpg',
-                '150.jpg'
+                'sleep.png',
+                'WIDESLEEP.png',
             ]);
         });
 
@@ -418,7 +434,15 @@
         // Sleep Button Event Listener
         sleepBtn.addEventListener("click", function () {
             increaseSleeping(60); // Increase sleeping by 60 units
-            // Optionally, add sleep animation or state changes here
+
+            // Apply the sleeping effect
+            petContainer.classList.add("sleeping");
+
+            // Optionally, remove the sleeping effect after a certain duration
+            // For example, remove after 5 seconds (5000ms)
+            setTimeout(() => {
+                petContainer.classList.remove("sleeping");
+            }, 5000); // Adjust the duration as needed
         });
 
         // Preload Images
