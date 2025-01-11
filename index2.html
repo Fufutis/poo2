@@ -294,7 +294,7 @@
         const foodSelector = document.getElementById("foodSelector");
 
         // Pet Name
-        petName.textContent = localStorage.getItem('petName') || 'Pooshtis';
+        petName.textContent = localStorage.getItem('petName');
 
         // Status Thresholds
         const maxHealth = 100;
@@ -442,6 +442,16 @@
             // Animate Eating
             petContainer.classList.add("eating");
             setTimeout(() => petContainer.classList.remove("eating"), 500);
+
+            // **Disable the Feed button for 2 seconds after feeding**
+            feedBtn.disabled = true;
+
+            setTimeout(() => {
+                // Re-enable the Feed button only if not sleeping
+                if (!isSleeping) {
+                    feedBtn.disabled = false;
+                }
+            }, 2000); // 2000 milliseconds = 2 seconds
         });
 
         // Sleep Button Event Listener (Toggle Functionality)
