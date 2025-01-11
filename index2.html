@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title id="petName">petName</title>
+    <title id="petTitle">Pooshtis</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
@@ -52,189 +52,205 @@
         }
 
         #sleepBtn {
-            left: 60%;
+            left: 52.5%;
         }
 
-        /* Pet Container Styles */
-        #petContainer {
-            height: calc(100vh - 56px);
-            width: 100%;
-            background: url('CAT2.PNG') no-repeat center center;
-            background-size: 100% 100%;
-            background-position: top center;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-
-            transition: background-image 0.1s ease-in-out, filter 0.5s ease;
-            position: relative;
-        }
-
-        /* Sleeping State */
-        #petContainer.sleeping {
-            filter: brightness(50%);
-            background-size: 100% 100%;
-            background: url('sleep.png') no-repeat center center;
-        }
-
-        @media (orientation: landscape) {
-            #petContainer.sleeping {
-                background: url('widesleep.png') no-repeat center center;
-                background-size: 100% 100%;
-                filter: brightness(50%);
-                /* Maintain brightness reduction */
-            }
-        }
-
-        @media (orientation: landscape) {
-            #petContainer {
-                background: url('WIDECAT.PNG') no-repeat center center;
-                background-size: 100% 100%;
-            }
-        }
-
-        /* Eating State */
-        #petContainer.eating {
-            background: url('CAT22.PNG') no-repeat center center;
-            background-size: 100% 100%;
-        }
-
-        @media (orientation: landscape) {
-            #petContainer.eating {
-                background: url('WIDECAT2.PNG') no-repeat center center;
-                background-size: 100% 100%;
-            }
-        }
-
-        /* Navbar Content */
-        .navbar-brand {
-            margin-right: 2rem;
-        }
-
-        .navbar-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            justify-content: center;
-            /* Centers items horizontally */
-        }
-
-        /* Media Query for Small Screens (480px and below) */
-        @media (max-width: 480px) {
-
-            /* Double the Navbar Height */
-            nav.navbar {
-                height: 112px;
+        @media (max-width: 1598px) {
+            #feedBtn {
+                left: 38%;
             }
 
-            /* Stack Navbar Content Vertically */
-            .navbar-content {
-                flex-direction: column;
-                align-items: center;
-            }
 
-            /* Adjust Bar Containers */
-            .bar-container {
-                width: 80%;
-                /* Increased width for better visibility */
-                margin: 5px 0;
-                /* Vertical spacing between bars */
-            }
+        }
 
-            /* Adjust Button Positions */
+        @media (max-width: 603px) {
             #feedBtn {
                 left: 35%;
-                /* Adjusted to center more */
             }
 
-            #sleepBtn {
-                left: 55%;
-                /* Adjusted to center more */
+            /* Pet Container Styles */
+            #petContainer {
+                height: calc(100vh - 56px);
+                width: 100%;
+                background: url('CAT2.PNG') no-repeat center center;
+                background-size: 100% 100%;
+                background-position: top center;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+
+                transition: background-image 0.1s ease-in-out, filter 0.5s ease;
+                position: relative;
             }
 
-            /* Optional: Adjust Font Size for Labels */
-            #foodSelector {
-                width: 60%;
-                /* Make the selector wider on small screens */
+            /* Sleeping State */
+            #petContainer.sleeping {
+                filter: brightness(50%);
+                background-size: 100% 100%;
+                background: url('sleep.png') no-repeat center center;
             }
-        }
 
-        /* Progress Bars Container */
-        .bar-container {
-            width: 17%;
-            height: 20px;
-            background-color: #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            border: 2px solid black;
-        }
-
-        /* Individual Bars */
-        .bar {
-            height: 100%;
-            border-radius: 5px 0 0 5px;
-            transition: width 0.5s ease;
-        }
-
-        #healthBar {
-            background-color: #ff0000;
-            width: 100%;
-        }
-
-        #feedingBar {
-            background-color: #c57e0b;
-            width: 100%;
-        }
-
-        #sleepingBar {
-            background-color: #4b44ad;
-            width: 100%;
-        }
-
-        /* Pet Name Styles */
-        #petName {
-            font-size: 1.5rem;
-            /* Default font size */
-            margin: 0;
-            white-space: nowrap;
-            /* Prevent text from wrapping */
-            overflow: hidden;
-            /* Hide overflow text */
-            text-overflow: ellipsis;
-            /* Add ellipsis (...) when text is too long */
-            max-width: 150px;
-            /* Adjust as needed */
-        }
-
-        /* Responsive Font Sizes for Pet Name */
-        @media (max-width: 780px) {
-            #petName {
-                font-size: 1.2rem;
+            @media (orientation: landscape) {
+                #petContainer.sleeping {
+                    background: url('widesleep.png') no-repeat center center;
+                    background-size: 100% 100%;
+                    filter: brightness(50%);
+                    /* Maintain brightness reduction */
+                }
             }
-        }
 
-        @media (max-width: 480px) {
-            #petName {
-                font-size: 1rem;
+            @media (orientation: landscape) {
+                #petContainer {
+                    background: url('WIDECAT.PNG') no-repeat center center;
+                    background-size: 100% 100%;
+                }
             }
-        }
 
-        /* Status Message */
-        #statusMessage {
-            color: red;
-            font-weight: bold;
-            font-size: 2rem;
-            position: absolute;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: none;
-        }
+            /* Eating State */
+            #petContainer.eating {
+                background: url('CAT22.PNG') no-repeat center center;
+                background-size: 100% 100%;
+            }
+
+            @media (orientation: landscape) {
+                #petContainer.eating {
+                    background: url('WIDECAT2.PNG') no-repeat center center;
+                    background-size: 100% 100%;
+                }
+            }
+
+            /* Navbar Content */
+            .navbar-brand {
+                margin-right: 2rem;
+            }
+
+            .navbar-content {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 1rem;
+                justify-content: center;
+                /* Centers items horizontally */
+            }
+
+            /* Media Query for Small Screens (480px and below) */
+            @media (max-width: 480px) {
+
+                /* Double the Navbar Height */
+                nav.navbar {
+                    height: 112px;
+                }
+
+                /* Stack Navbar Content Vertically */
+                .navbar-content {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                /* Adjust Bar Containers */
+                .bar-container {
+                    width: 80%;
+                    /* Increased width for better visibility */
+                    margin: 5px 0;
+                    /* Vertical spacing between bars */
+                }
+
+                /* Adjust Button Positions */
+                #feedBtn {
+                    left: 35%;
+                    /* Adjusted to center more */
+                }
+
+                #sleepBtn {
+                    left: 55%;
+                    /* Adjusted to center more */
+                }
+
+                /* Optional: Adjust Font Size for Labels */
+                #foodSelector {
+                    width: 60%;
+                    /* Make the selector wider on small screens */
+                }
+            }
+
+            /* Progress Bars Container */
+            .bar-container {
+                width: 17%;
+                height: 20px;
+                background-color: #ccc;
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+                border: 2px solid black;
+            }
+
+            /* Individual Bars */
+            .bar {
+                height: 100%;
+                border-radius: 5px 0 0 5px;
+                transition: width 0.5s ease;
+            }
+
+            #healthBar {
+                background-color: #ff0000;
+                width: 100%;
+            }
+
+            #feedingBar {
+                background-color: #c57e0b;
+                width: 100%;
+            }
+
+            #sleepingBar {
+                background-color: #4b44ad;
+                width: 100%;
+            }
+
+            /* Pet Name Styles */
+            #petNameDisplay {
+                /* Updated ID */
+                font-size: 1.5rem;
+                /* Default font size */
+                margin: 0;
+                white-space: nowrap;
+                /* Prevent text from wrapping */
+                overflow: hidden;
+                /* Hide overflow text */
+                text-overflow: ellipsis;
+                /* Add ellipsis (...) when text is too long */
+                max-width: 150px;
+                /* Adjust as needed */
+            }
+
+            /* Responsive Font Sizes for Pet Name */
+            @media (max-width: 780px) {
+                #petNameDisplay {
+                    /* Updated ID */
+                    font-size: 1.2rem;
+                }
+            }
+
+            @media (max-width: 480px) {
+                #petNameDisplay {
+                    /* Updated ID */
+                    font-size: 1rem;
+                }
+            }
+
+            /* Status Message */
+            #statusMessage {
+                color: red;
+                font-weight: bold;
+                font-size: 2rem;
+                position: absolute;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+            }
     </style>
 </head>
 
@@ -242,7 +258,7 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid navbar-content">
-            <h2 id="petName" class="text-light mb-0">Kolokotronis</h2>
+            <h2 id="petNameDisplay" class="text-light mb-0">Kolokotronis</h2> <!-- Updated ID -->
             <!-- Health Bar -->
             <div class="bar-container">
                 <div id="healthBar" class="bar"></div>
@@ -284,7 +300,7 @@
     <script>
         // Existing DOM Elements
         const petContainer = document.getElementById("petContainer");
-        const petName = document.getElementById('petName');
+        const petNameDisplay = document.getElementById('petNameDisplay'); // Updated ID
         const feedBtn = document.getElementById("feedBtn");
         const sleepBtn = document.getElementById("sleepBtn");
         const healthBar = document.getElementById("healthBar");
@@ -292,9 +308,12 @@
         const sleepingBar = document.getElementById("sleepingBar");
         const statusMessage = document.getElementById("statusMessage");
         const foodSelector = document.getElementById("foodSelector");
+        const petTitle = document.getElementById("petTitle"); // New reference for <title>
 
         // Pet Name
-        petName.textContent = localStorage.getItem('petName');
+        const petName = localStorage.getItem('petName');
+        petNameDisplay.textContent = petName;
+        petTitle.textContent = petName; // Set <title> text
 
         // Status Thresholds
         const maxHealth = 100;
@@ -499,6 +518,9 @@
             urls.forEach((url) => {
                 const img = new Image();
                 img.src = url;
+                img.onerror = function () {
+                    console.error(`Failed to load image: ${url}`);
+                };
             });
         }
     </script>
