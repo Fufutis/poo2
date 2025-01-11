@@ -315,9 +315,9 @@
 
         // Food Effects
         const foodEffects = {
-            apple: 10,
-            orange: 30,
-            banana: 90
+            apple: { food: 5, health: 10 },    // Apple: +5 Food, +10 Health
+            orange: { food: 20 },              // Orange: +20 Food
+            banana: { food: 10, sleep: 10 }    // Banana: +10 Food, +10 Sleeping
         };
 
         // Flag to track sleep state
@@ -347,18 +347,18 @@
 
             // Decrease Feeding over time
             feedingDecreaseInterval = setInterval(() => {
-                decreaseFeeding(1);
+                decreaseFeeding(2);
             }, 1000); // Decrease every second
 
             // Decrease Sleeping over time
             sleepingDecreaseInterval = setInterval(() => {
-                decreaseSleeping(1);
+                decreaseSleeping(2);
             }, 1000); // Decrease every second
 
             // Conditionally decrease Health
             healthDecreaseInterval = setInterval(() => {
                 if (currentFeeding < feedingThreshold) {
-                    decreaseHealth(1);
+                    decreaseHealth(2);
                 }
             }, 1000); // Check every second
         }
@@ -436,8 +436,18 @@
         // Feed Button Event Listener
         feedBtn.addEventListener("click", function () {
             const selectedFood = foodSelector.value;
-            const healthIncrease = foodEffects[selectedFood] || 0;
-            increaseFeeding(healthIncrease);
+            const effects = foodEffects[selectedFood] || {};
+
+            // Apply food effects
+            if (effects.food) {
+                increaseFeeding(effects.food);
+            }
+            if (effects.health) {
+                increaseHealth(effects.health);
+            }
+            if (effects.sleep) {
+                increaseSleeping(effects.sleep);
+            }
 
             // Animate Eating
             petContainer.classList.add("eating");
