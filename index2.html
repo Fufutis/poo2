@@ -40,6 +40,12 @@
             background-color: rgb(1, 34, 77);
         }
 
+        /* Disabled Button Styles */
+        .action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         /* Positioning Buttons */
         #feedBtn {
             left: 40%;
@@ -446,6 +452,9 @@
                 petContainer.classList.add("sleeping");
                 sleepBtn.textContent = "Wake Up"; // Update button text
 
+                // **Disable the Feed button while sleeping**
+                feedBtn.disabled = true;
+
                 // Start Sleep Regeneration
                 sleepRegenerationInterval = setInterval(() => {
                     increaseSleeping(5); // Regenerate sleep by 5 units per second
@@ -456,6 +465,9 @@
                 isSleeping = false;
                 petContainer.classList.remove("sleeping");
                 sleepBtn.textContent = "Sleep"; // Revert button text
+
+                // **Enable the Feed button when waking up**
+                feedBtn.disabled = false;
 
                 // Stop Sleep Regeneration
                 clearInterval(sleepRegenerationInterval);
