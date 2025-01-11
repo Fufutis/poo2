@@ -387,6 +387,26 @@
             ]);
         });
 
+        const feedSound = new Audio('Cat_idle3.ogg.mp3');
+        feedSound.preload = 'auto';
+
+        const sleepSound = new Audio('Cat_purr2.ogg.mp3');
+        sleepSound.preload = 'auto';
+
+        const feed2Sound = new Audio('Cat_idle2.ogg.mp3');
+        feedSound.preload = 'auto';
+
+        const feed3Sound = new Audio('Cat_idle4.ogg.mp3');
+        sleepSound.preload = 'auto';
+
+        const feed4Sound = new Audio('video_2025-01-11_11-53-52.mp3');
+        sleepSound.preload = 'auto';
+
+        const feed5Sound = new Audio('video_2025-01-11_11-51-18.mp3');
+        sleepSound.preload = 'auto';
+
+        // Play Sounds
+
         function initPet() {
             currentHealth = maxHealth;
             currentFeeding = maxFeeding;
@@ -480,6 +500,9 @@
                 }, 1000);
             }
         }
+        let i = 0; // Initialize the counter outside the event listener
+
+        const feedSounds = [feedSound, feed2Sound, feed3Sound, feed4Sound, feed5Sound]; // Array of feed sounds
 
         // Feed Button Event Listener
         feedBtn.addEventListener("click", function () {
@@ -497,6 +520,12 @@
                 increaseSleeping(effects.sleep);
             }
 
+            // Play the current feed sound
+            feedSounds[i].play();
+
+            // Update the counter to the next sound, looping back to 0 after the last sound
+            i = (i + 1) % feedSounds.length;
+
             // Animate Eating
             petContainer.classList.add("eating");
             setTimeout(() => petContainer.classList.remove("eating"), 500);
@@ -512,6 +541,7 @@
             }, 2000); // 2000 milliseconds = 2 seconds
         });
 
+
         // Sleep Button Event Listener (Toggle Functionality)
         sleepBtn.addEventListener("click", function () {
             if (!isSleeping) {
@@ -526,6 +556,7 @@
                 // Start Sleep Regeneration
                 sleepRegenerationInterval = setInterval(() => {
                     increaseSleeping(5); // Regenerate sleep by 5 units per second
+                    sleepSound.play();
                 }, 1000); // Every 1000ms (1 second)
 
             } else {
