@@ -52,7 +52,7 @@
         }
 
         #sleepBtn {
-            left: 52.5%;
+            left: 53.5%;
         }
 
         @media (max-width: 1598px) {
@@ -67,190 +67,191 @@
             #feedBtn {
                 left: 35%;
             }
+        }
 
-            /* Pet Container Styles */
-            #petContainer {
-                height: calc(100vh - 56px);
-                width: 100%;
-                background: url('CAT2.PNG') no-repeat center center;
-                background-size: 100% 100%;
-                background-position: top center;
+        /* Pet Container Styles */
+        #petContainer {
+            height: calc(100vh - 56px);
+            width: 100%;
+            background: url('CAT2.PNG') no-repeat center center;
+            background-size: 100% 100%;
+            background-position: top center;
 
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
 
-                transition: background-image 0.1s ease-in-out, filter 0.5s ease;
-                position: relative;
-            }
+            transition: background-image 0.1s ease-in-out, filter 0.5s ease;
+            position: relative;
+        }
 
-            /* Sleeping State */
+        /* Sleeping State */
+        #petContainer.sleeping {
+            filter: brightness(50%);
+            background-size: 100% 100%;
+            background: url('sleep.png') no-repeat center center;
+        }
+
+        @media (orientation: landscape) {
             #petContainer.sleeping {
+                background: url('widesleep.png') no-repeat center center;
+                background-size: 100% 100%;
                 filter: brightness(50%);
+                /* Maintain brightness reduction */
+            }
+        }
+
+        @media (orientation: landscape) {
+            #petContainer {
+                background: url('WIDECAT.PNG') no-repeat center center;
                 background-size: 100% 100%;
-                background: url('sleep.png') no-repeat center center;
             }
+        }
 
-            @media (orientation: landscape) {
-                #petContainer.sleeping {
-                    background: url('widesleep.png') no-repeat center center;
-                    background-size: 100% 100%;
-                    filter: brightness(50%);
-                    /* Maintain brightness reduction */
-                }
-            }
+        /* Eating State */
+        #petContainer.eating {
+            background: url('CAT22.PNG') no-repeat center center;
+            background-size: 100% 100%;
+        }
 
-            @media (orientation: landscape) {
-                #petContainer {
-                    background: url('WIDECAT.PNG') no-repeat center center;
-                    background-size: 100% 100%;
-                }
-            }
-
-            /* Eating State */
+        @media (orientation: landscape) {
             #petContainer.eating {
-                background: url('CAT22.PNG') no-repeat center center;
+                background: url('WIDECAT2.PNG') no-repeat center center;
                 background-size: 100% 100%;
             }
+        }
 
-            @media (orientation: landscape) {
-                #petContainer.eating {
-                    background: url('WIDECAT2.PNG') no-repeat center center;
-                    background-size: 100% 100%;
-                }
+        /* Navbar Content */
+        .navbar-brand {
+            margin-right: 2rem;
+        }
+
+        .navbar-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            /* Centers items horizontally */
+        }
+
+        /* Media Query for Small Screens (480px and below) */
+        @media (max-width: 480px) {
+
+            /* Double the Navbar Height */
+            nav.navbar {
+                height: 112px;
             }
 
-            /* Navbar Content */
-            .navbar-brand {
-                margin-right: 2rem;
-            }
-
+            /* Stack Navbar Content Vertically */
             .navbar-content {
-                display: flex;
-                flex-wrap: wrap;
+                flex-direction: column;
                 align-items: center;
-                gap: 1rem;
-                justify-content: center;
-                /* Centers items horizontally */
             }
 
-            /* Media Query for Small Screens (480px and below) */
-            @media (max-width: 480px) {
-
-                /* Double the Navbar Height */
-                nav.navbar {
-                    height: 112px;
-                }
-
-                /* Stack Navbar Content Vertically */
-                .navbar-content {
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                /* Adjust Bar Containers */
-                .bar-container {
-                    width: 80%;
-                    /* Increased width for better visibility */
-                    margin: 5px 0;
-                    /* Vertical spacing between bars */
-                }
-
-                /* Adjust Button Positions */
-                #feedBtn {
-                    left: 35%;
-                    /* Adjusted to center more */
-                }
-
-                #sleepBtn {
-                    left: 55%;
-                    /* Adjusted to center more */
-                }
-
-                /* Optional: Adjust Font Size for Labels */
-                #foodSelector {
-                    width: 60%;
-                    /* Make the selector wider on small screens */
-                }
-            }
-
-            /* Progress Bars Container */
+            /* Adjust Bar Containers */
             .bar-container {
-                width: 17%;
-                height: 20px;
-                background-color: #ccc;
-                border-radius: 10px;
-                overflow: hidden;
-                position: relative;
-                border: 2px solid black;
+                width: 80%;
+                /* Increased width for better visibility */
+                margin: 5px 0;
+                /* Vertical spacing between bars */
             }
 
-            /* Individual Bars */
-            .bar {
-                height: 100%;
-                border-radius: 5px 0 0 5px;
-                transition: width 0.5s ease;
+            /* Adjust Button Positions */
+            #feedBtn {
+                left: 35%;
+                /* Adjusted to center more */
             }
 
-            #healthBar {
-                background-color: #ff0000;
-                width: 100%;
+            #sleepBtn {
+                left: 55%;
+                /* Adjusted to center more */
             }
 
-            #feedingBar {
-                background-color: #c57e0b;
-                width: 100%;
+            /* Optional: Adjust Font Size for Labels */
+            #foodSelector {
+                width: 60%;
+                /* Make the selector wider on small screens */
             }
+        }
 
-            #sleepingBar {
-                background-color: #4b44ad;
-                width: 100%;
-            }
+        /* Progress Bars Container */
+        .bar-container {
+            width: 17%;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid black;
+        }
 
-            /* Pet Name Styles */
+        /* Individual Bars */
+        .bar {
+            height: 100%;
+            border-radius: 5px 0 0 5px;
+            transition: width 0.5s ease;
+        }
+
+        #healthBar {
+            background-color: #ff0000;
+            width: 100%;
+        }
+
+        #feedingBar {
+            background-color: #c57e0b;
+            width: 100%;
+        }
+
+        #sleepingBar {
+            background-color: #4b44ad;
+            width: 100%;
+        }
+
+        /* Pet Name Styles */
+        #petNameDisplay {
+            /* Updated ID */
+            font-size: 1.5rem;
+            /* Default font size */
+            margin: 0;
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Hide overflow text */
+            text-overflow: ellipsis;
+            /* Add ellipsis (...) when text is too long */
+            max-width: 150px;
+            /* Adjust as needed */
+        }
+
+        /* Responsive Font Sizes for Pet Name */
+        @media (max-width: 780px) {
             #petNameDisplay {
                 /* Updated ID */
-                font-size: 1.5rem;
-                /* Default font size */
-                margin: 0;
-                white-space: nowrap;
-                /* Prevent text from wrapping */
-                overflow: hidden;
-                /* Hide overflow text */
-                text-overflow: ellipsis;
-                /* Add ellipsis (...) when text is too long */
-                max-width: 150px;
-                /* Adjust as needed */
+                font-size: 1.2rem;
             }
+        }
 
-            /* Responsive Font Sizes for Pet Name */
-            @media (max-width: 780px) {
-                #petNameDisplay {
-                    /* Updated ID */
-                    font-size: 1.2rem;
-                }
+        @media (max-width: 480px) {
+            #petNameDisplay {
+                /* Updated ID */
+                font-size: 1rem;
             }
+        }
 
-            @media (max-width: 480px) {
-                #petNameDisplay {
-                    /* Updated ID */
-                    font-size: 1rem;
-                }
-            }
-
-            /* Status Message */
-            #statusMessage {
-                color: red;
-                font-weight: bold;
-                font-size: 2rem;
-                position: absolute;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: none;
-            }
+        /* Status Message */
+        #statusMessage {
+            color: red;
+            font-weight: bold;
+            font-size: 2rem;
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
     </style>
 </head>
 
