@@ -63,33 +63,6 @@
 
         }
 
-        @media (max-width: 565px) {
-            #feedBtn {
-                left: 35%;
-            }
-
-            nav.navbar {
-                height: 15%;
-                /* Set your desired height */
-            }
-
-            /* Adjust Pet Container Size */
-            #petContainer {
-
-                /* Reduced height */
-
-                /* Added width constraint */
-            }
-
-            /* Move Buttons Higher */
-            .action-btn {
-                bottom: 12%;
-                margin-left: -30px;
-                width: 18%;
-                padding-left: 15px;
-                /* Increased from 25px to 50px */
-            }
-        }
 
         /* Pet Container Styles */
         #petContainer {
@@ -142,6 +115,32 @@
             #petContainer.eating {
                 background: url('WIDECAT2.PNG') no-repeat center center;
                 background-size: 100% 100%;
+            }
+        }
+
+        @media (max-width: 565px) {
+            #feedBtn {
+                left: 35%;
+            }
+
+            nav.navbar {
+                height: 15%;
+                /* Set your desired height */
+            }
+
+            /* Adjust Pet Container Size */
+            #petContainer {
+
+                height: calc(100vh - 106px);
+            }
+
+            /* Move Buttons Higher */
+            .action-btn {
+                bottom: 12%;
+                margin-left: -30px;
+                width: 18%;
+                padding-left: 15px;
+                /* Increased from 25px to 50px */
             }
         }
 
