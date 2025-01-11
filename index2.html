@@ -314,6 +314,12 @@
             banana: 90
         };
 
+        // Flag to track sleep state
+        let isSleeping = false;
+
+        // Interval for sleep regeneration
+        let sleepRegenerationInterval;
+
         // Initialize Pet Stats
         window.addEventListener("load", function () {
             initPet();
@@ -413,6 +419,7 @@
                 clearInterval(healthDecreaseInterval);
                 clearInterval(feedingDecreaseInterval);
                 clearInterval(sleepingDecreaseInterval);
+                clearInterval(sleepRegenerationInterval); // Ensure regeneration interval is cleared
                 // Redirect to index.html after a short delay
                 setTimeout(() => {
                     window.location.href = "index.html";
@@ -431,18 +438,28 @@
             setTimeout(() => petContainer.classList.remove("eating"), 500);
         });
 
-        // Sleep Button Event Listener
+        // Sleep Button Event Listener (Toggle Functionality)
         sleepBtn.addEventListener("click", function () {
-            increaseSleeping(60); // Increase sleeping by 60 units
+            if (!isSleeping) {
+                // Activate Sleep
+                isSleeping = true;
+                petContainer.classList.add("sleeping");
+                sleepBtn.textContent = "Wake Up"; // Update button text
 
-            // Apply the sleeping effect
-            petContainer.classList.add("sleeping");
+                // Start Sleep Regeneration
+                sleepRegenerationInterval = setInterval(() => {
+                    increaseSleeping(5); // Regenerate sleep by 5 units per second
+                }, 1000); // Every 1000ms (1 second)
 
-            // Optionally, remove the sleeping effect after a certain duration
-            // For example, remove after 5 seconds (5000ms)
-            setTimeout(() => {
+            } else {
+                // Deactivate Sleep
+                isSleeping = false;
                 petContainer.classList.remove("sleeping");
-            }, 5000); // Adjust the duration as needed
+                sleepBtn.textContent = "Sleep"; // Revert button text
+
+                // Stop Sleep Regeneration
+                clearInterval(sleepRegenerationInterval);
+            }
         });
 
         // Preload Images
