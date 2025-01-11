@@ -84,9 +84,10 @@
 
         /* Sleeping State */
         #petContainer.sleeping {
+            background: url('sleep.png') no-repeat center center;
             filter: brightness(50%);
             background-size: 100% 100%;
-            background: url('sleep.png') no-repeat center center;
+
         }
 
         @media (orientation: landscape) {
@@ -121,10 +122,13 @@
         @media (max-width: 565px) {
             #feedBtn {
                 left: 35%;
+                margin-left: -60px;
             }
 
+
+
             nav.navbar {
-                height: 15%;
+                height: 112px;
                 /* Set your desired height */
             }
 
@@ -137,9 +141,10 @@
             /* Move Buttons Higher */
             .action-btn {
                 bottom: 12%;
-                margin-left: -30px;
-                width: 18%;
-                padding-left: 15px;
+                margin-left: -20px;
+                width: 28%;
+                padding-left: -5px;
+                padding-right: -5px;
                 /* Increased from 25px to 50px */
             }
         }
@@ -309,10 +314,11 @@
     </nav>
 
     <div id="petContainer">
+        <span id="statusMessage">Your pet is sick!</span>
         <button id="feedBtn" class="action-btn">Feed</button>
         <button id="sleepBtn" class="action-btn">Sleep</button>
         <!-- Status Message -->
-        <span id="statusMessage">Your pet is sick!</span>
+
     </div>
 
     <!-- Bootstrap JS -->
